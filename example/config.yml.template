@@ -1,0 +1,10 @@
+ali:
+  certId: x
+  ak: x
+  sk: x
+aws:
+  ak: x
+  sk: x
+  region: x
+  certArn: x
+  snsTopicArn: x
