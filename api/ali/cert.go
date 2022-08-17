@@ -6,7 +6,7 @@ import (
 	util "github.com/alibabacloud-go/tea-utils/service"
 )
 
-func GetAliCert (certId int64) (*cli.DescribeUserCertificateDetailResponse, error) {
+func GetCert (certId int64) (*cli.DescribeUserCertificateDetailResponse, error) {
   describeUserCertificateDetailRequest := &cli.DescribeUserCertificateDetailRequest{
 	CertId: &certId,
   }
