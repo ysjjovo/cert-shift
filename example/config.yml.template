@@ -3,8 +3,5 @@ ali:
   ak: x
   sk: x
 aws:
-  ak: x
-  sk: x
-  region: x
-  certArn: x
-  snsTopicArn: x
+  certId: x
+  snsTopic: x

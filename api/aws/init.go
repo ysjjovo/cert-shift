@@ -5,14 +5,10 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/credentials"
 )
 var cfg aws.Config
-func InitConfig(ak, sk, region string) error{
+func InitConfig() error{
 	var err error
-	cfg, err = config.LoadDefaultConfig(context.TODO(),
-		config.WithCredentialsProvider(credentials.NewStaticCredentialsProvider(ak, sk, "")),
-		config.WithRegion(region),
-	)
+	cfg, err = config.LoadDefaultConfig(context.TODO())
 	return err
 }
