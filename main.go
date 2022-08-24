@@ -68,10 +68,18 @@ func getRegionAndAcc(ctx context.Context) (string, error) {
 	return region + ":" + acc, nil
 }
 func getCertARN(regionAndAcc, certId string) string {
-	return fmt.Sprintf("arn:aws:acm:%s:certificate/%s", regionAndAcc, certId)
+	var cn string
+	if regionAndAcc[0] == 'c' && regionAndAcc[1] == 'n' {
+		cn = "-cn"
+	}
+	return fmt.Sprintf("arn:aws%s:acm:%s:certificate/%s", cn, regionAndAcc, certId)
 }
 func getSNSTopicArn(regionAndAcc, topic string) string {
-	return fmt.Sprintf("arn:aws:sns:%s:%s", regionAndAcc, topic)
+	var cn string
+	if regionAndAcc[0] == 'c' && regionAndAcc[1] == 'n' {
+		cn = "-cn"
+	}
+	return fmt.Sprintf("arn:aws%s:sns:%s:%s", cn, regionAndAcc, topic)
 }
 func init() {
 	var err error
@@ -102,10 +110,19 @@ func init() {
 	} else {
 		cfgBytes = res.Content
 	}
+	// tmp := make(map [string]interface{})
+	// if err = yaml.Unmarshal(cfgBytes, tmp); err != nil {
+	// 	println("yaml convert to map error", err)
+	// 	os.Exit(1)
+	// }
+	// s, _ := json.Marshal(tmp)
+	// println("s", string(s))
+
 	if err = yaml.Unmarshal(cfgBytes, &cfg); err != nil {
-		println("yaml convert to map error", err)
+		println("yaml convert to config error", err)
 		os.Exit(1)
 	}
+	
 	ali.InitClient(cfg.Ali.Ak, cfg.Ali.Sk)
 	aws.InitACMClient()
 	if cfg.Aws.SnsTopic != "" {
