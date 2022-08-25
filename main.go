@@ -14,14 +14,7 @@ import (
 	"ysjjovo.ml/cert-shift/api/ali"
 	"ysjjovo.ml/cert-shift/api/aws"
 )
-type Env string
-const (
-	Dev Env = "Dev"
-	Stg Env = "Stg"
-	Prod Env = "Prod"
-)
 type Config struct {
-	Env Env `yaml:"env"` 
 	Ali struct {
 		Ak     string `yaml:"ak"`
 		Sk     string `yaml:"sk"`
